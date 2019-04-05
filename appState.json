@@ -1,0 +1,137 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "4cdd29d1-7f7b-431b-8412-f6f1281a09e6": {
+        "id": "4cdd29d1-7f7b-431b-8412-f6f1281a09e6",
+        "parent": null,
+        "name": "python",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "0563f401-5172-442e-9d3e-5b7989b84451",
+          "4d5271da-1d88-43b4-ad24-569711037bd5"
+        ],
+        "isRemovable": false,
+        "filePath": "python"
+      },
+      "0563f401-5172-442e-9d3e-5b7989b84451": {
+        "id": "0563f401-5172-442e-9d3e-5b7989b84451",
+        "parent": "4cdd29d1-7f7b-431b-8412-f6f1281a09e6",
+        "name": "js.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "python/js.js",
+        "code": "exports.handler = function(event, context, callback) {\n    console.log(\"boo\")\n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "config": {
+          "runtime": "nodejs6.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [],
+        "testCases": {
+          "b50f7ae4-a9b5-4a41-8aa4-43335fff78d2": {
+            "id": "b50f7ae4-a9b5-4a41-8aa4-43335fff78d2",
+            "name": "js",
+            "functionId": "0563f401-5172-442e-9d3e-5b7989b84451",
+            "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
+          }
+        }
+      },
+      "4d5271da-1d88-43b4-ad24-569711037bd5": {
+        "id": "4d5271da-1d88-43b4-ad24-569711037bd5",
+        "parent": "4cdd29d1-7f7b-431b-8412-f6f1281a09e6",
+        "name": "test.r",
+        "type": "R_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "python/test.r",
+        "code": "handler <- function(x) {\r\n\treturn(x + 1)\r\n}"
+      }
+    },
+    "deletedFiles": [
+      "python/lambda.js",
+      "python/kpl.js",
+      "python/bok.py",
+      "python/py.py",
+      "python/test.R.txt",
+      "python/test.txt"
+    ],
+    "rootNode": "4cdd29d1-7f7b-431b-8412-f6f1281a09e6",
+    "openFiles": [
+      "4d5271da-1d88-43b4-ad24-569711037bd5"
+    ],
+    "currentFileId": "4d5271da-1d88-43b4-ad24-569711037bd5",
+    "resources": {},
+    "customTemplate": {
+      "dialect": "CloudFormation",
+      "definitions": {
+        "Resources": {
+          "R": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "FunctionName": "R",
+              "Description": "R functon deployed from Sigma",
+              "Code": {
+                "S3Bucket": "com.sigma.test.318300609668.janakaud.us-east-1",
+                "S3Key": "python/sigma_builds/build_1554429474160.zip"
+              },
+              "MemorySize": 128,
+              "Handler": "python/test.handler",
+              "Timeout": 60,
+              "Runtime": "provided",
+              "Layers": [
+                "arn:aws:lambda:us-east-1:131329294410:layer:r-runtime-3_5_1:1",
+                "arn:aws:lambda:us-east-1:131329294410:layer:r-recommended-3_5_1:1"
+              ],
+              "Role": {
+                "Fn::GetAtt": [
+                  "pythonjsExecutionRole",
+                  "Arn"
+                ]
+              },
+              "Environment": {
+                "Variables": {
+                  "SIGMA_AWS_ACC_ID": "318300609668"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "python",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1554429879189
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "python",
+      "url": "https://github.com/janakaud/aws-lambda-r-example"
+    }
+  }
+}
